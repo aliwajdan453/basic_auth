@@ -6,7 +6,9 @@ module.exports = (err, req, res, next) => {
     `Type: ${typeof err}`
   );
 
-  if (process.env.ENVIRONMENT === undefined) console.error(err);
+  if (process.env.ENVIRONMENT === undefined || !err.isOperational) {
+    console.error(err);
+  }
 
   err = handleError(err);
 
